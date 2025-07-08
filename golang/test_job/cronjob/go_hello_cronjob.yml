@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  creationTimestamp: null
+  name: td-cronjob
+spec:
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+      name: td-cronjob
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - image: go-terry-hello
+            imagePullPolicy: IfNotPresent
+            name: td-cronjob
+            resources: {}
+          nodeSelector:
+            tester: "true"
+          restartPolicy: OnFailure
+  schedule: 0/5 * * * ?
+  successfulJobsHistoryLimit: 1
+status: {}

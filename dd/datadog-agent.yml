@@ -1,31 +1,20 @@
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  global:
-    clusterName: microk8s-homelab
-    site: datadoghq.com
-    credentials:
-      apiSecret:
-        secretName: datadog-secret
-        keyName: api-key
-    kubelet:
-      tlsVerify: false
-  features:
-    orchestratorExplorer:
-      enabled: true
-    apm:
-      enabled: false
-    logCollection:
-      enabled: true
-      containerCollectAll: true
-  override:
-    nodeAgent:
-#      env:
-#        - name: DD_IGNORE_AUTOCONF
-#          value: kube_scheduler kube_controller_manager etcd
-    clusterAgent:
-      env:
-        - name: DD_CLUSTER_NAME
-          value: microk8s-homelab
+datadog:
+  apiKeyExistingSecret: datadog-secret
+  appKeyExistingSecret: datadog-secret
+  clusterName: homelab-microk8s
+  tags: []
+  orchestratorExplorer:
+    enabled: true
+  logs:
+    enabled: true
+    containerCollectAll: true
+    containerCollectUsingFiles: true
+  containerExcludeLogs: "image:agent image:calico image:coredns"
+  #containerIncludeLogs: "image:go-terry-hello"
+#  apm:
+#    portEnabled: false
+#    socketPath: /var/run/datadog/apm.socket
+#    hostSocketPath: /var/run/datadog/
+  processAgent:
+    enabled: true
+    processCollection: false

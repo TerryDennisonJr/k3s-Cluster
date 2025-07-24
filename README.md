@@ -10,7 +10,10 @@
 ### Setup
 * [Youtube Vid](https://www.youtube.com/watch?v=6PqxJhV-t1s)
 
-1. Run [script]()
+1. Run [script](https://github.com/TerryDennisonJr/k3s-Cluster/blob/main/k8_sstup.sh)
+```
+sh <PARH_TO_SCRIPT>
+```
 2. Add `cgroup_enable=memory cgroup_memory=1` at end of line in `/boot/firmware/cmdline.txt` file 
 ```
  ...cgroup_enable=memory cgroup_memory=1

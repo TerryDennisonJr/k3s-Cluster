@@ -1,8 +1,8 @@
 # k3s-Cluster
-* Host: Raspberry Pi
+* Devices: Raspberry Pi
 * Master: (pi5 16GB)
 * Worker: (p4 8GB)
-OS: Raspian Lite (64-bit)
+* OS: Raspian Lite (64-bit)
 
 # My K8's Homelab
 * Orchestration: [k3s](https://docs.k3s.io/quick-start)

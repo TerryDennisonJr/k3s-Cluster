@@ -1,7 +1,7 @@
 # k3s-Cluster
 * Devices: Raspberry Pi
 * Master: (pi5 16GB)
-* Worker: (p4 8GB)
+* Worker: (pi4 8GB)
 * OS: Raspian Lite (64-bit)
 
 # My K8's Homelab
@@ -66,9 +66,7 @@ users:
     client-certificate-data: <VALUE>
 
 ```
-```
 
-```
 # Deploying example image from host with `microK8s`":
 ```
 k run <NAME> --image=<VALUE> --image-pull-policy='IfNotPresent'

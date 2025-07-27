@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: sense-weather
+  name: sense-weather
+  namespace: staging  
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sense-weather
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: sense-weather
+    spec:
+      containers:
+      - image: infinitiq502004/raspiweather:1.0
+        name: raspiweather
+        resources: {}
+        securityContext:
+          privileged: true
+      nodeSelector:
+        deployment_node: weather_app
+status: {}

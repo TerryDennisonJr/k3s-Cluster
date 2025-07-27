@@ -1,0 +1,30 @@
+datadog:
+  apiKeyExistingSecret: datadog-secret
+  appKeyExistingSecret: datadog-secret
+  clusterName: ifrit-k3s
+  tags: []
+  orchestratorExplorer:
+    enabled: true
+  logs:
+    enabled: true
+    containerCollectAll: true
+    containerCollectUsingFiles: true
+  containerExcludeLogs: "image:agent"
+  #containerIncludeLogs: "image:go-terry-hello"
+#  apm:
+#    portEnabled: false
+#    socketPath: /var/run/datadog/apm.socket
+#    hostSocketPath: /var/run/datadog/
+  processAgent:
+    enabled: true
+    processCollection: false
+  confd:
+    fluxcd.yaml: |-
+      ad_identifiers:
+        - helm-controller
+        - kustomize-controller
+        - notification-controller
+        - source-controller
+      init_config:
+      instances:
+        - openmetrics_endpoint: http://%%host%%:8080/metrics

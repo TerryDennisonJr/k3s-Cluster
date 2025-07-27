@@ -14,6 +14,7 @@ sleep 30
 #Docker
 sudo echo "Docker Install"
 sudo apt install docker.io -y
+sudo usermod -aG docker $USER && newgrp docker
 
 
 #helm
@@ -22,23 +23,7 @@ sudo curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/
 sudo chmod 700 get_helm.sh
 sudo ./get_helm.sh
 
-echo -e "Close terminal ssh session and re-connect to run commands:\n"
-
-#Rancher
-echo -e "k3s install...\n"
-echo -e "curl -sfL https://get.k3s.io | sh -\n"
-echo -e "sudo chmod 644 /etc/rancher/k3s/k3s.yaml\n"
-
-
-# sudo sed -i '1s_$_ cgroup_enable=memory cgroup_memory=1_' /boot/firmware/cmdline.txt 
-# echo -e "Add cgroup_enable=memory cgroup_memory=1 to /boot/firmware/cmdline.txt "
-
-
-echo "sudo nano /boot/firmware/cmdline.txt"
-echo -e "ADD to file 'cgroup_enable=memory cgroup_memory=1'\n"
-echo "sudo usermod -aG docker $USER && newgrp docker"
-
+echo -e "Set alias"
 echo "alias k='kubectl'"
 
-echo "Rebooting as k3s service needed memory addition to properly run."
-sudo reboot
+echo -e "Start new terminal session to run remaining commands in README:\n"

@@ -16,8 +16,8 @@ docker pull arm64v8/ubuntu
 docker build -t <USER>/<NAME>:<TAG> -f <DOCKERFILE> .
 ```
 
-* `infinitiq502004/raspiweather:1.0 -f Dockerfile .` for full app
-* `infinitiq502004/raspiweather_only:1.0 -f Dockerfile2 .` for just weather app
+* `infinitiq502004/raspiweather:1.0 -f k8s_weather/Dockerfile .` for full app
+* `infinitiq502004/raspiweather_only:1.0 -f k8s_weather_only/Dockerfile2 .` for just weather app
 
 ### 2. Push image to dockerhub account
 

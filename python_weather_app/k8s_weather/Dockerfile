@@ -16,8 +16,7 @@ build-essential \
 sense-hat \
 nano 
 
-ADD ./sensehat_mysql.py \
-./sensehat.py /home/
+ADD ./sensehat_mysql.py /home/
 
 RUN rm -f /tmp/*.deb && apt-get clean
 

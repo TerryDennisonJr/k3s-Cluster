@@ -36,3 +36,13 @@ docker push infinitiq502004/<NAME>:<TAG>
 nodeSelector:
     deployment_node: weather_app
 ```
+
+---
+
+## Deploying App
+
+* run `bash` script
+
+```bash
+sh app_deploy.sh
+```

@@ -3,7 +3,7 @@
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 NC='\033[0m'
-DD_PATH="/Users/terrydennison/Desktop/k3s-homelab/k3s-Cluster/datadog_observability/datadog/datadog.yaml"
+DD_PATH="~/Desktop/k3s-homelab/k3s-Cluster/datadog_observability/datadog/datadog.yaml"
 SECRETS_PW=$1
 AGENT_PW=$2
 
@@ -15,7 +15,7 @@ echo "${GREEN}Please enter agent password for Datadog mysql connection${NC}"
 read AGENT_PW
 echo "Agent Password is: ${YELLOW}$AGENT_PW\n${NC}"
 
-sed -i '' "s|\          password: \"”|          password: ${AGENT_PW}|" ~/Desktop/k3s-homelab/k3s-Cluster/datadog_observability/datadog/datadog.yaml
+sed -i '' "s|\          password: \"”|          password: \"${AGENT_PW}\"|" ~/Desktop/k3s-homelab/k3s-Cluster/datadog_observability/datadog/datadog.yaml
 
 sleep 5
 
@@ -41,8 +41,6 @@ sleep 150
 
 echo "\n${GREEN}Datadog setup for mysql connection of Agent...\n${NC}"
 
-# sed -i 's|          password: ""|          password: "$(AGENT_PW)”|' ${DD_PATH}
-
 # kubectl exec -it $WEATHER_APP_POD_NAME  -- mysql -uroot -p$SECRETS_PW --execute="ALTER USER 'datadog'@'%' IDENTIFIED BY '$AGENT_PW';"
 kubectl exec -it $WEATHER_APP_POD_NAME  -- mysql -uroot -p$SECRETS_PW --execute="CREATE USER 'datadog'@'%' IDENTIFIED BY '$AGENT_PW';"
 kubectl exec -it $WEATHER_APP_POD_NAME  -- mysql -uroot -p$SECRETS_PW --execute="GRANT REPLICATION CLIENT ON *.* TO 'datadog'@'%';"
@@ -51,5 +49,9 @@ kubectl exec -it $WEATHER_APP_POD_NAME  -- mysql -uroot -p$SECRETS_PW --execute=
 kubectl exec -it $WEATHER_APP_POD_NAME  -- mysql -uroot -p$SECRETS_PW --execute="GRANT SELECT ON performance_schema.* TO 'datadog'@'%';"
 kubectl exec -it $WEATHER_APP_POD_NAME  -- mysql -uroot -p$SECRETS_PW --execute="GRANT SELECT ON mysql.innodb_index_stats TO 'datadog'@'%';"
 
-echo "\n${GREEN}Components Deployed:${NC} ${YELLOW}\n1. App\n2. Mysql \n3. Datadog Agent for Mysql Intgration configured${NC}"
+echo "Upgrading Datadog Agent with Mysql Integration Configuration\n"
+
+helm upgrade datadog-agent -f ~/Desktop/k3s-homelab/k3s-Cluster/datadog_observability/datadog/datadog.yaml  datadog/datadog
+
+echo "\n${GREEN}Components Deployed:${NC} ${YELLOW}\n1. App\n2. Mysql \n3. Datadog Agent for Mysql Intgration configured\n4. Agent helm upgrade${NC}"
 echo "\nCheck dd"

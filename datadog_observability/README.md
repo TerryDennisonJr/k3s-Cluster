@@ -1,12 +1,16 @@
 # Helm Install of Agent
 
-### Create Secret
+## Create Secret
+
+```bash
+
+kubectl create secret generic datadog-secret --from-literal api-key=<VALUE> --from-literal app-key=<VALUE>
 ```
-k create secret generic datadog-secret --from-literal api-key=<VALUE> --from-literal app-key=<VALUE>
-```
-### Install Agent
+
+## Install Agent
+
 - Using `datadog-agent.yml` file
 
-```
-helm upgrade datadog-agent -f datadog-agent.yml datadog/datadog
+```bash
+helm install datadog-agent -f datadog-agent.yml datadog/datadog
 ```

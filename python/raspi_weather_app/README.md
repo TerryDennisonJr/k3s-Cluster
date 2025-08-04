@@ -46,3 +46,11 @@ nodeSelector:
 ```bash
 sh app_deploy.sh
 ```
+
+## Tearing Down App
+
+* run teardown `bash` script
+
+```bash
+sh app_teardown.sh
+```

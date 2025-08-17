@@ -1,88 +1,85 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   creationTimestamp: null
-#   labels:
-#     app: sense-weather
-#   name: sense-weather
-#   # namespace: staging  
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: sense-weather
-#   strategy: {}
-#   template:
-#     metadata:
-#       creationTimestamp: null
-#       labels:
-#         app: sense-weather
-#     spec:
-#       containers:
-#       - image: infinitiq502004/raspiweather:26.0
-#         name: raspiweather
-#         env:
-#         - name: MYSQL_HOST
-#           # value: "mysql-svc.mysql.svc.cluster.local"
-#           value: "mysql-svc"
-#           # - name: DB_NAME
-#           #   value: "weather-database"          
-#           # - name: DB_USER
-#           #   value: "weather-user" 
-#           # - name: DB_PASSWORD
-#           #   valueFrom:
-#           #     secretKeyRef:
-#           #       name: mysql-secret
-#           #       key: password  
-#           # - name: MYSQL_ROOT_PASSWORD
-#           #   valueFrom:
-#           #     secretKeyRef:
-#           #       name: mysql-secret
-#           #       key: password           
-#         resources: {}
-#         securityContext:
-#           privileged: true
-#       nodeSelector:
-#         deployment_node: weather_app
-# status: {}
-# ---
-apiVersion: batch/v1
-kind: CronJob
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   creationTimestamp: null
+  labels:
+    app: raspi-weather
   name: raspi-weather
+  # namespace: staging  
 spec:
-  jobTemplate:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: raspi-weather
+  strategy: {}
+  template:
     metadata:
       creationTimestamp: null
-      name: raspi-weather
+      labels:
+        app: raspi-weather
     spec:
-      template:
-        metadata:
-          creationTimestamp: null
-        spec:
-          containers:
-          - image: {{ .Values.imageTag}}
-            imagePullPolicy: IfNotPresent
-            env:
-            - name: MYSQL_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: weather-config 
-                  key: mysql_host
-            - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: password                                           
-            name: raspiweather
-            resources: {}
-            securityContext:
-              privileged: true            
-          nodeSelector:
-            deployment_node: weather_app
-          restartPolicy: OnFailure
-  schedule: 0/10 * * * ?
-  successfulJobsHistoryLimit: 1
+      containers:
+      - image: {{ .Values.weather_app.image}}
+        imagePullPolicy: IfNotPresent
+        name: raspiweather
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: {{ .Values.mysql.rootPassword}}          
+        - name: MYSQL_HOST
+          value: {{ .Values.mysql.host}}
+        - name: MYSQL_DATABASE
+          value: {{ .Values.mysql.database}}           
+        - name: MYSQL_USER
+          value: {{ .Values.mysql.user}}
+        - name: MYSQL_PASSWORD
+          value: {{ .Values.mysql.password}}                           
+        volumeMounts:
+        - name: host-volume
+          mountPath: /mnt/host-data          
+        resources: {}
+        securityContext:
+          privileged: true
+      volumes:
+      - name: host-volume
+        hostPath:
+          path: /home/raspiNode/mydata/weather_app
+          type: DirectoryOrCreate    
+      nodeSelector:
+        deployment_node: weather_app 
+      restartPolicy: Always  
 status: {}
+
+# apiVersion: batch/v1
+# kind: CronJob
+# metadata:
+#   creationTimestamp: null
+#   name: raspi-weather
+# spec:
+#   jobTemplate:
+#     metadata:
+#       creationTimestamp: null
+#       name: raspi-weather
+#     spec:
+#       template:
+#         metadata:
+#           creationTimestamp: null
+#         spec:
+#           containers:
+#           - image: {{ .Values.weather_app.image}}
+#             imagePullPolicy: IfNotPresent
+#             env:
+#             - name: MYSQL_HOST
+#               value: {{ .Values.mysql.host}}
+#             - name: MYSQL_ROOT_PASSWORD
+#               value: {{ .Values.mysql.rootPassword}}                                      
+#             name: raspiweather
+#             resources: {}
+#             securityContext:
+#               privileged: true            
+#           nodeSelector:
+#             deployment_node: weather_app
+#           restartPolicy: OnFailure
+#   schedule: 0/1 * * * ?
+#   successfulJobsHistoryLimit: 1
+# status: {}
 

@@ -1,7 +1,16 @@
 # Default values for pi-weather-chart.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-imageTag: infinitiq502004/pi-weather:2.3
+
+mysql:
+  rootPassword: ""
+  host: ""
+  database: ""
+  user: ""
+  password: ""
+
+weather_app:
+  image: ""
 
 # This will set the replicaset count more information can be found here: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
 replicaCount: 1

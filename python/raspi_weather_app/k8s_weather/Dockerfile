@@ -16,10 +16,11 @@ build-essential \
 sense-hat \
 nano 
 
-ADD ./sensehat_mysql.py /home/
+# ADD ./sensehat_mysql.py /home/
 
 RUN rm -f /tmp/*.deb && apt-get clean
 
 WORKDIR /
 
-ENTRYPOINT ["python3", "/home/sensehat_mysql.py"]
+# ENTRYPOINT ["python3", "/home/sensehat_mysql.py"]
+ENTRYPOINT [ "sleep", "infinity" ]

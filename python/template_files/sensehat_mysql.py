@@ -1,10 +1,6 @@
-import os
-import random
-import time
-import mysql.connector
-import logging
-from sense_hat import SenseHat
 from datetime import date, datetime
+import random, time, mysql.connector, logging
+from sense_hat import SenseHat
 
 sense = SenseHat()
 
@@ -15,10 +11,10 @@ logger.addHandler(console_handler)
 
 print("Initializing Weahter App...")
 #Pod data for session...
-pod_user=os.getenv('MYSQL_USER')
-pod_password=os.getenv('MYSQL_PASSWORD')
-pod_host=os.getenv('MYSQL_HOST')
-pod_database=os.getenv('MYSQL_DATABASE')
+pod_user=
+pod_password=
+pod_host=
+pod_database=
 
 class Weather:
 

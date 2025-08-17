@@ -45,19 +45,15 @@ spec:
         name: mysql-db
         env:
         - name: MYSQL_USER
-          value: "dd_earl"
+          value: {{ .Values.mysql.user}}
         - name: MYSQL_PASSWORD
-          value: "password_weather"  
+          value: {{ .Values.mysql.password}}                
         - name: MYSQL_DATABASE
-          value: "weather_database"                    
+          value: {{ .Values.mysql.database}}                
         - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secret
-              key: password   
+          value: {{ .Values.mysql.rootPassword}}                    
         ports:
         - containerPort: 3306    
-          # name: mysql-svc
       #   volumeMounts:
       #   - name: mysql-persistent-storage
       #     mountPath: /var/lib/mysql
@@ -71,7 +67,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-svc
+  name: {{ .Values.mysql.host}}
 spec:
   ports:
   - port: 3306

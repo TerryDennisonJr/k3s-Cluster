@@ -35,4 +35,4 @@ datadog:
       instances:
         - server: "%%host%%"
           username: "datadog"
-          password: "dd_password@2025"
+          password: "”

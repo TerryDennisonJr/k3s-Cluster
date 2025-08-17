@@ -14,11 +14,12 @@ logger.addHandler(console_handler)
 
 
 print("Initializing Weahter App...")
-#Pod data for session...
-pod_user=os.getenv('MYSQL_USER')
-pod_password=os.getenv('MYSQL_PASSWORD')
-pod_host=os.getenv('MYSQL_HOST')
-pod_database=os.getenv('MYSQL_DATABASE')
+# Pod data for session...
+pod_user = os.getenv("MYSQL_USER")
+pod_password = os.getenv("MYSQL_PASSWORD")
+pod_host = os.getenv("MYSQL_HOST")
+pod_database = os.getenv("MYSQL_DATABASE")
+
 
 class Weather:
 

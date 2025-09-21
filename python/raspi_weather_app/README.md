@@ -25,8 +25,8 @@ docker build -t <USER>/<NAME>:<TAG> -f <DOCKERFILE> .
 docker push infinitiq502004/<NAME>:<TAG>
 ```
 
-* `infinitiq502004/raspiweather:<TAG>` for full app
-* `infinitiq502004/raspiweather_only:<TAG>` for just weather app
+* `infinitiq502004/pi-weather:<TAG>` for full app
+* `infinitiq502004/pi-weather_only:<TAG>` for just weather app
 
 ## Applying weather pods to `raspi4Node` `Node`
 
@@ -54,3 +54,7 @@ sh app_deploy.sh
 ```bash
 sh app_teardown.sh
 ```
+
+## Notes
+
+* Dev Container Image `infinitiq502004/pi-weather:3.1`

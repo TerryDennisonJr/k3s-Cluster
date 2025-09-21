@@ -12,5 +12,5 @@ kubectl create secret generic datadog-secret --from-literal api-key=<VALUE> --fr
 - Using `datadog-agent.yml` file
 
 ```bash
-helm install datadog-agent -f datadog-agent.yml datadog/datadog
+helm install datadog -f datadog.yaml datadog/datadog
 ```

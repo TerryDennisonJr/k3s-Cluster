@@ -8,4 +8,4 @@ cp -r ~/Desktop/k3s-homelab/k3s-Cluster/datadog_observability/datadog/template/t
 # rm -r ~/Desktop/k3s-homelab/k3s-Cluster/python/raspi_weather_app/k8s_weather/sensehat_mysql.py
 # cp -r ~/Desktop/k3s-homelab/k3s-Cluster/python/template_files/sensehat_mysql.py ~/Desktop/k3s-homelab/k3s-Cluster/python/raspi_weather_app/k8s_weather/
 
-helm upgrade datadog-agent -f ~/Desktop/k3s-homelab/k3s-Cluster/datadog_observability/datadog/datadog.yaml  datadog/datadog
+helm upgrade datadog -f ~/Desktop/k3s-homelab/k3s-Cluster/datadog_observability/datadog/datadog.yaml  datadog/datadog

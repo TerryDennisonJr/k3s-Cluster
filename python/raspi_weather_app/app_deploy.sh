@@ -10,8 +10,8 @@ echo "${GREEN}Please enter agent password for Datadog mysql connection${NC}"
 read AGENT_PW
 echo "Your setting the Agent password as: ${YELLOW}$AGENT_PW\n${NC}"
 
-sed -i '' "s|\          password: \"”|          password: \"${AGENT_PW}\"|" ~/Desktop/k3s-homelab/k3s-Cluster/datadog_observability/datadog/datadog.yaml
-
+# sed -i '' "s|\          password: \"”|          password: \"${AGENT_PW}\"|" ~/Desktop/k3s-homelab/k3s-Cluster/datadog_observability/datadog/datadog.yaml
+sed -i '' "s|\          password: |          password: \"${AGENT_PW}\"|" ~/Desktop/k3s-homelab/k3s-Cluster/datadog_observability/datadog/datadog.yaml
 sleep 5
 
 echo "${GREEN}Deploying app via Helm...\n${NC}"
@@ -50,7 +50,7 @@ kubectl exec -it $WEATHER_APP_POD_NAME  -- mysql -uroot -p$ROOT_PW --execute="GR
 
 echo "Upgrading Datadog Agent with Mysql Integration Configuration\n"
 
-helm upgrade datadog-agent -f ~/Desktop/k3s-homelab/k3s-Cluster/datadog_observability/datadog/datadog.yaml  datadog/datadog
+helm upgrade datadog -f ~/Desktop/k3s-homelab/k3s-Cluster/datadog_observability/datadog/datadog.yaml  datadog/datadog
 
 echo "\n${GREEN}Components Deployed:${NC} ${YELLOW}\n1. App\n2. Mysql \n3. Datadog Agent for Mysql Intgration configured\n4. Agent helm upgrade${NC}"
 echo "\nCheck dd"

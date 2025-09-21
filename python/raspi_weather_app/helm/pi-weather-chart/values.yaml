@@ -10,7 +10,7 @@ mysql:
   password: ""
 
 weather_app:
-  image: ""
+  image: "infinitiq502004/pi-weather:3.7"
 
 # This will set the replicaset count more information can be found here: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
 replicaCount: 1

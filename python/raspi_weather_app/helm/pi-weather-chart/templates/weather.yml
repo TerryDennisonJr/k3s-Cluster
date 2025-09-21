@@ -32,7 +32,11 @@ spec:
         - name: MYSQL_USER
           value: {{ .Values.mysql.user}}
         - name: MYSQL_PASSWORD
-          value: {{ .Values.mysql.password}}                           
+          value: {{ .Values.mysql.password}}    
+        - name: DD_AGENT_HOST
+          valueFrom:
+              fieldRef:
+                  fieldPath: status.hostIP                                 
         volumeMounts:
         - name: host-volume
           mountPath: /mnt/host-data          
@@ -42,44 +46,9 @@ spec:
       volumes:
       - name: host-volume
         hostPath:
-          path: /home/raspiNode/mydata/weather_app
+          path: /home/workerraspi/mydata/weather_app
           type: DirectoryOrCreate    
       nodeSelector:
         deployment_node: weather_app 
       restartPolicy: Always  
 status: {}
-
-# apiVersion: batch/v1
-# kind: CronJob
-# metadata:
-#   creationTimestamp: null
-#   name: raspi-weather
-# spec:
-#   jobTemplate:
-#     metadata:
-#       creationTimestamp: null
-#       name: raspi-weather
-#     spec:
-#       template:
-#         metadata:
-#           creationTimestamp: null
-#         spec:
-#           containers:
-#           - image: {{ .Values.weather_app.image}}
-#             imagePullPolicy: IfNotPresent
-#             env:
-#             - name: MYSQL_HOST
-#               value: {{ .Values.mysql.host}}
-#             - name: MYSQL_ROOT_PASSWORD
-#               value: {{ .Values.mysql.rootPassword}}                                      
-#             name: raspiweather
-#             resources: {}
-#             securityContext:
-#               privileged: true            
-#           nodeSelector:
-#             deployment_node: weather_app
-#           restartPolicy: OnFailure
-#   schedule: 0/1 * * * ?
-#   successfulJobsHistoryLimit: 1
-# status: {}
-

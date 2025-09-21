@@ -10,6 +10,11 @@ datadog:
     containerCollectAll: true
     containerCollectUsingFiles: true
   containerExcludeLogs: "image:agent"
+  dogstatsd:
+    port: 8125
+    useHostPort: true
+    nonLocalTraffic: true    
+    dogstatsd_metrics_stats_enable: true
   #containerIncludeLogs: "image:go-terry-hello"
 #  apm:
 #    portEnabled: false
@@ -19,15 +24,6 @@ datadog:
     enabled: true
     processCollection: false
   confd:
-    fluxcd.yaml: |-
-      ad_identifiers:
-        - helm-controller
-        - kustomize-controller
-        - notification-controller
-        - source-controller
-      init_config:
-      instances:
-        - openmetrics_endpoint: http://%%host%%:8080/metrics
     mysql.yaml: |-
       ad_identifiers:
         - mysql
@@ -35,4 +31,7 @@ datadog:
       instances:
         - server: "%%host%%"
           username: "datadog"
-          password: "”
+          password: 
+clusterAgent:
+  nodeSelector:
+    deployment_node: master_node         

@@ -51,7 +51,7 @@ spec:
         - name: MYSQL_DATABASE
           value: {{ .Values.mysql.database}}                
         - name: MYSQL_ROOT_PASSWORD
-          value: {{ .Values.mysql.rootPassword}}                    
+          value: {{ .Values.mysql.rootPassword}}                            
         ports:
         - containerPort: 3306    
       #   volumeMounts:
@@ -62,7 +62,7 @@ spec:
       #   persistentVolumeClaim:
       #     claimName: mysql-pv-claims
       nodeSelector:
-        deployment_node: weather_app          
+        deployment_node: lenovo_node          
 ---
 apiVersion: v1
 kind: Service

@@ -90,4 +90,4 @@ while True:
     statsd.gauge('humidity.gauge',  my_weather.humi_val, tags=["device:raspi4"])
     statsd.gauge('pressure.gauge', my_weather.press_val, tags=["device:raspi4"])
     
-    time.sleep(60)
+    time.sleep(300)

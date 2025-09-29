@@ -5,6 +5,9 @@ datadog:
   tags: []
   orchestratorExplorer:
     enabled: true
+  env:
+    - name: DD_DOGSTATSD_METRICS_STATS_ENABLE
+      value: true
   logs:
     enabled: true
     containerCollectAll: true

@@ -3,11 +3,11 @@
 # Declare variables to be passed into your templates.
 
 mysql:
-  rootPassword: 
-  host: ""
-  database: ""
-  user: ""
-  password: 
+  rootPassword: earl_the_best
+  host: "pi4host"
+  database: "weather_db"
+  user: "weather_user"
+  password: td_usr_pwd
 
 weather_app:
   image: "infinitiq502004/pi-weather:3.11"

@@ -1,6 +1,6 @@
 FROM arm64v8/ubuntu
 
-COPY k8s_weather/sensehat_mysql.py /mnt/host-data/
+# COPY k8s_weather/sensehat_mysql.py /mnt/host-data/
 
 WORKDIR /tmp
 
@@ -24,5 +24,5 @@ RUN rm -f /tmp/*.deb && apt-get clean
 
 WORKDIR /
 
-ENTRYPOINT ["python3", "/mnt/host-data/sensehat_mysql.yaml"]
+ENTRYPOINT ["python3", "/mnt/host-data/sensehat_mysql.py"]
 # ENTRYPOINT [ "sleep", "infinity" ]

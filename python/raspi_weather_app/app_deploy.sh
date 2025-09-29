@@ -36,7 +36,7 @@ sleep 3
 
 echo "\n${GREEN}Standing by for database to initialize...${NC}"
 
-sleep 150
+sleep 45
 
 echo "\n${GREEN}Datadog setup for mysql connection of Agent...\n${NC}"
 

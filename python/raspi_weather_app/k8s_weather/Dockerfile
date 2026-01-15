@@ -1,9 +1,10 @@
 FROM arm64v8/ubuntu
 
-# COPY k8s_weather/sensehat_mysql.py /mnt/host-data/
+# COPY k8s_weather/ /mnt/host-data/
 
 WORKDIR /tmp
 
+ 
 COPY k8s_weather/requirements.txt /tmp
 
 RUN apt-get update \
@@ -24,5 +25,9 @@ RUN rm -f /tmp/*.deb && apt-get clean
 
 WORKDIR /
 
-ENTRYPOINT ["python3", "/mnt/host-data/sensehat_mysql.py"]
-# ENTRYPOINT [ "sleep", "infinity" ]
+RUN mkdir weather_app 
+RUN chmod 777 weather_app
+COPY k8s_weather weather_app
+
+# ENTRYPOINT ["python3", "/mnt/host-data/sensehat_mysql.py"]
+ENTRYPOINT [ "sleep", "infinity" ]

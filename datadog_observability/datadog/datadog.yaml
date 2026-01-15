@@ -34,7 +34,7 @@ datadog:
       instances:
         - server: "%%host%%"
           username: "datadog"
-          password: 
+          password: "dsfasfa"
 clusterAgent:
   nodeSelector:
     deployment_node: master_node         

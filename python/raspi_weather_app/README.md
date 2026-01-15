@@ -16,8 +16,8 @@ docker pull arm64v8/ubuntu
 docker build -t <USER>/<NAME>:<TAG> -f <DOCKERFILE> .
 ```
 
-* `infinitiq502004/raspiweather:1.0 -f k8s_weather/Dockerfile .` for full app
-* `infinitiq502004/raspiweather_only:1.0 -f k8s_weather_only/Dockerfile2 .` for just weather app
+* `infinitiq502004/raspiweather:3.5 -f k8s_weather/Dockerfile .` for full app
+* `infinitiq502004/raspiweather_only:3.5 -f k8s_weather_only/Dockerfile2 .` for just weather app
 
 ### 2. Push image to dockerhub account
 
@@ -28,13 +28,26 @@ docker push infinitiq502004/<NAME>:<TAG>
 * `infinitiq502004/pi-weather:<TAG>` for full app
 * `infinitiq502004/pi-weather_only:<TAG>` for just weather app
 
-## Applying weather pods to `raspi4Node` `Node`
+## Setting weather pod to specific raspberrypi `Node`
 
 * Adding the `nodeSelector` to target pod to `raspi4Node` `Node`
 
-```text
+```bash
+k label node <NODE> deployment_node=sensehatpi
+```
+
+Raspberry Pi with sensehat
+
+```yaml
 nodeSelector:
-    deployment_node: weather_app
+    deployment_node: sensehatpi
+```
+
+Raspberry Pi for database
+
+```yaml
+nodeSelector:
+    deployment_node: sensehatpi
 ```
 
 ---
@@ -58,3 +71,11 @@ sh app_teardown.sh
 ## Notes
 
 * Dev Container Image `infinitiq502004/pi-weather:3.1`
+
+```sql
+SELECT * FROM weather_db.weather_table;
+```
+
+```bash
+for i in {1..9}; do python3 mnt/host-data/sensehat_mysql.py ;done
+```

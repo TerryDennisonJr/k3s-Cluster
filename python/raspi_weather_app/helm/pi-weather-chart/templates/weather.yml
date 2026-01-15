@@ -46,9 +46,9 @@ spec:
       volumes:
       - name: host-volume
         hostPath:
-          path: /home/raspiNode/mydata/weather_app
+          path: /home/pi5/weather_app
           type: DirectoryOrCreate    
       nodeSelector:
-        deployment_node: weather_app 
+        deployment_node: sensehatpi 
       restartPolicy: Always  
 status: {}

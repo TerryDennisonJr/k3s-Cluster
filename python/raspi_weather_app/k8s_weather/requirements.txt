@@ -6,7 +6,7 @@ mysql-connector-python==9.4.0
 numpy==1.26.4
 olefile==0.46
 pillow==10.2.0
-python-apt==2.7.7+ubuntu5
+# python-apt==2.7.7+ubuntu5
 requests==2.32.5
 RTIMULib==7.2.1
 sense-hat==2.2.0

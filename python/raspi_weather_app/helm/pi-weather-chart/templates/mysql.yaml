@@ -70,7 +70,7 @@ spec:
       #   persistentVolumeClaim:
       #     claimName: mysql-pv-claims
       nodeSelector:
-        deployment_node: lenovo_node          
+        deployment_node: sensehatpi         
 ---
 apiVersion: v1
 kind: Service
